@@ -1,0 +1,35 @@
+import java.io.*;
+class Main
+  	{
+	public static void main(String args[]) throws IOException
+		{
+		IdLexer lex = new IdLexer(new FileReader("input"));
+		Token token = lex.yylex();
+		while(token.text != null)
+			{
+			token = lex.yylex();
+			}
+		}
+	}
+class Token
+	{
+	String text;
+	Token (String t) {
+	text = t;
+	}
+	}
+%%
+%public
+%class IdLexer
+%type void
+%eofval{
+	return new Token(null);
+%eofval}
+%type Token
+
+%%
+[\n] {
+
+	System.out.println("NL ");
+
+	}
